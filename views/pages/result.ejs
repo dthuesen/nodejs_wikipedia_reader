@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+<div class="row">
+	<div class="col-sm-12">
+		<h3>Die Suche nach <b>"<%= search %>"</b> liefert folgende Resultate: </h3><br>
+	</div>
+</div>
+
+<% for(var key in response.query.pages) { %>
+	<% if(response.query.pages.hasOwnProperty(key)) { %>
+
+		<% var value = response.query.pages[key] %>
+		<div class="panel panel-default"> 
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<%= value.title %>
+					<!-- < %= JSON.stringify(value) %> -->
+				</h3>
+			</div>
+			<div class="panel-body">
+				<% if(value.thumbnail) { %> 
+					<img src="<%= value.thumbnail.source %>" style="float: left; max-width:150px; margin-right: 15px;">
+				<% } %>
+				<%- value.extract %>
+				<% console.log(value) %>
+			</div>
+		</div>
+	<% } %>
+<% } %>
+
+<% include ../partials/footer %>
